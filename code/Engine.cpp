@@ -4,6 +4,8 @@
 using namespace sf;
 using namespace std;
 
+RenderWindow m_Window;
+
 Engine::Engine()
 {
   

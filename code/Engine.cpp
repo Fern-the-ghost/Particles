@@ -15,7 +15,7 @@ Engine::Engine()
   VideoMode::getDesktopMode();
 }
 
-void run()
+void Engine::run()
 {
   Clock clock;
   Time time1 = clock.getElapsedTime();
@@ -34,16 +34,31 @@ void run()
     }
 }
 
-void input()
+void Engine::input()
 {
+  Event event;
   
+  while(window.pollEvent(event))
+  {
+      if(event.type == Event::Closed)
+      {
+          window.close();
+      }
+  }
+  if(event.type == Event::MouseButtonPressed)
+  {
+    if(event.mouseButton.button == Mouse::Left)
+    {
+      
+    }
+  }
 }
 
-void update(float dtAsSeconds)
+void Engine::update(float dtAsSeconds)
 {
 }
 
-void draw()
+void Endgine::draw()
 {
   
 }

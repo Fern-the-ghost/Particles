@@ -8,3 +8,19 @@ Engine::Engine()
 {
   
 }
+
+void input()
+{
+}
+
+void update(float dtAsSeconds)
+{
+}
+
+void draw()
+{
+}
+
+void run()
+{
+}

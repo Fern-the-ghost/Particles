@@ -28,7 +28,7 @@ void Engine::run()
   while(m_Window.isOpen)
     {
       Time time2 = clock.restart();
-      clock.input();
+      input();
       update(time1);
       draw();
     }

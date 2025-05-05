@@ -49,13 +49,15 @@ void Engine::input()
   {
     if(event.mouseButton.button == Mouse::Left)
     {
-      
+      //Use numPoints from Particles to go from [25:50]
+      //Pass to the particles position with the mouse click so it has a starting position
     }
   }
 }
 
 void Engine::update(float dtAsSeconds)
 {
+  
 }
 
 void Endgine::draw()

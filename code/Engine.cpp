@@ -15,20 +15,6 @@ Engine::Engine()
   VideoMode::getDesktopMode();
 }
 
-void input()
-{
-  
-}
-
-void update(float dtAsSeconds)
-{
-}
-
-void draw()
-{
-  
-}
-
 void run()
 {
   Clock clock;
@@ -42,8 +28,22 @@ void run()
   while(m_Window.isOpen)
     {
       Time time2 = clock.restart();
-      input();
+      clock.input();
       update(time1);
       draw();
     }
+}
+
+void input()
+{
+  
+}
+
+void update(float dtAsSeconds)
+{
+}
+
+void draw()
+{
+  
 }

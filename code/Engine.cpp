@@ -27,10 +27,11 @@ void Engine::run()
 
   while(m_Window.isOpen)
     {
-      Time time2 = clock.restart();
-      input();
-      update(time1);
-      draw();
+      clock.restart();
+      float sec = time1.asSeconds();
+      p.input();
+      p.update(sec);
+      p.draw();
     }
 }
 
@@ -44,18 +45,25 @@ void Engine::input()
       {
           window.close();
       }
-  }
-  if(event.type == Event::MouseButtonPressed)
-  {
-    if(event.mouseButton.button == Mouse::Left)
-    {
-      for(int i = 0; i < 5; i++)
-        {
-          Particle particle;
-          particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
-        }
-    }
-  }
+  
+      if(event.type == Event::MouseButtonPressed)
+      {
+          if(event.mouseButton.button == Mouse::Left)
+          {
+              for(int i = 0; i < 5; i++)
+              {
+                //use numPoints from the Particle constructor(?)
+                //Particle particle;
+                particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+              }
+          }
+      }
+      if (Keyboard::isKeyPressed(Keyboard::Escape))
+      {
+          window.close();
+      }
+  
+  } 
 }
 
 void Engine::update(float dtAsSeconds)

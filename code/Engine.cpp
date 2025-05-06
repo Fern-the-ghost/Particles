@@ -49,18 +49,40 @@ void Engine::input()
   {
     if(event.mouseButton.button == Mouse::Left)
     {
-      //Use numPoints from Particles to go from [25:50]
-      //Pass to the particles position with the mouse click so it has a starting position
+      for(int i = 0; i < 5; i++)
+        {
+          Particle particle;
+          particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+        }
     }
   }
 }
 
 void Engine::update(float dtAsSeconds)
 {
-  
+  for(int i = 0; i < m_particles)
+    {
+      if(getTTL() > 0.0)
+      {
+        particles.update(dt);
+        i++;
+      }
+      else
+      {
+        particles.erase(i);
+        //erase needs to return an iterator
+        //do not increment
+      }
+    }
 }
 
 void Endgine::draw()
 {
-  
+  window.clear();
+  for(int i = 0; i < m_Particles; i++)
+    {
+      m_Window.draw(m_Particles(i));
+      //should it be Particle::draw();?
+    }
+  window.display();
 }

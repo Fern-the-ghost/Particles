@@ -53,7 +53,7 @@ void Engine::input()
               for(int i = 0; i < 5; i++)
               {
                 //use numPoints from the Particle constructor(?)
-                //Particle particle;
+                //Particle particle; 
                 particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
               }
           }

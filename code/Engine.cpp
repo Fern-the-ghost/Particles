@@ -3,6 +3,7 @@
 #include "Particle.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
+#include "particle.cpp"
 using namespace sf;
 using namespace std;
 
@@ -39,11 +40,11 @@ void Engine::input()
 {
   Event event;
   
-  while(window.pollEvent(event))
+  while(m_window.pollEvent(event))
   {
       if(event.type == Event::Closed)
       {
-          window.close();
+          m_window.close();
       }
   
       if(event.type == Event::MouseButtonPressed)
@@ -54,13 +55,13 @@ void Engine::input()
               {
                 //use numPoints from the Particle constructor(?)
                 //Particle particle; 
-                particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+                m_particles.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
               }
           }
       }
       if (Keyboard::isKeyPressed(Keyboard::Escape))
       {
-          window.close();
+          m_window.close();
       }
   
   } 
@@ -70,27 +71,28 @@ void Engine::update(float dtAsSeconds)
 {
   for(int i = 0; i < m_particles)
     {
-      if(getTTL() > 0.0)
+      if(m_particles[i].getTTL() > 0.0)
       {
-        particles.update(dt);
+        m_particles[i].update(dt);
         i++;
       }
       else
       {
-        particles.erase(i);
-        //erase needs to return an iterator
-        //do not increment
+        m_particles.erase(i);
+        return i++; //don't know if this would work
+        //DO NOT increment
       }
     }
 }
 
 void Endgine::draw()
 {
-  window.clear();
-  for(int i = 0; i < m_Particles; i++)
+  m_window.clear();
+  for(int i = 0; i < m_particles; i++)
     {
-      m_Window.draw(m_Particles(i));
+      m_Window.draw(m_particles(i));
       //should it be Particle::draw();?
+      //mentions using polymorphism
     }
-  window.display();
+  m_window.display();
 }

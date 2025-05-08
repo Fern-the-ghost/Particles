@@ -90,11 +90,11 @@ void Engine::update(float dtAsSeconds)
 void Endgine::draw()
 {
   m_window.clear();
-  for(int i = 0; i < m_particles; i++)
+  //using this for loop would keep the vector the same and not change any of the info in the vector
+  for(const auto& Particle : m_particles)
     {
-      m_Window.draw(m_particles(i));
-      //should it be Particle::draw();?
-      //mentions using polymorphism
+      //Will go through each particle in the vector and put it in m_window.draw where it will call the Particle draw function
+      m_Window.draw(Particles);
     }
   m_window.display();
 }

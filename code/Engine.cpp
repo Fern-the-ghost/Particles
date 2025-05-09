@@ -58,7 +58,7 @@ void Engine::input()
                 
                 Particle particle(m_Window, numPoints, mouse_Pos);
                 
-                m_particle.push_back(particle);
+                m_particles.push_back(particle);
                 
               }
           }

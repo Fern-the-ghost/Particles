@@ -121,7 +121,7 @@ Update the particle's center coordinate:
     m_centerCoordinate.y += yShift;
  */
 
-Particle::translate(double xShift, double yShift) {
+void Particle::translate(double xShift, double yShift) {
     TranslationMatrix T(xShift, yShift);
     T += m_A;
     m_centerCoordinate.x += xShift;

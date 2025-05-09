@@ -69,9 +69,9 @@ void Engine::input()
   } 
 }
 
-void Engine::update(float dtAsSeconds)
+void Engine::update(float dt)
 {
-  for(int i = 0; i < m_particles)
+  for(int i = 0; i < m_particles;)
     {
       if(m_particles[i].getTTL() > 0.0)
       {

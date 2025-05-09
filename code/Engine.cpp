@@ -40,11 +40,11 @@ void Engine::input()
 {
   Event event;
   
-  while(m_window.pollEvent(event))
+  while(m_Window.pollEvent(event))
   {
       if(event.type == Event::Closed)
       {
-          m_window.close();
+          m_Window.close();
       }
   
       if(event.type == Event::MouseButtonPressed)
@@ -63,7 +63,7 @@ void Engine::input()
       }
       if (Keyboard::isKeyPressed(Keyboard::Escape))
       {
-          m_window.close();
+          m_Window.close();
       }
   
   } 
@@ -87,14 +87,14 @@ void Engine::update(float dt)
     }
 }
 
-void Endgine::draw()
+void Engine::draw()
 {
-  m_window.clear();
+  m_Window.clear();
   //using this for loop would keep the vector the same and not change any of the info in the vector
   for(const auto& Particle : m_particles)
     {
       //Will go through each particle in the vector and put it in m_window.draw where it will call the Particle draw function
       m_Window.draw(Particles);
     }
-  m_window.display();
+  m_Window.display();
 }

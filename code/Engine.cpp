@@ -71,7 +71,7 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
-  auto num = m_particles.begin();
+  float num = 0.0;
   
   while(num != m_particles.end())
     {

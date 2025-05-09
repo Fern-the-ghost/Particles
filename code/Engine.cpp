@@ -12,27 +12,24 @@ vector<Particle> m_particles;
 
 Engine::Engine()
 {
-  create(m_Window);
-  VideoMode::getDesktopMode(1980,1080);
+  m_Window.create(VideoMode(VideoMode::getDesktopMode()), "Particles Program");
 }
 
 void Engine::run()
 {
   Clock clock;
-  Time time1 = clock.getElapsedTime();
   
   cout << "Starting Particle unit tests..." << endl;
   Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
   p.unitTests();
   cout << "Unit tests complete.  Starting engine..." << endl;
 
-  while(m_Window.isOpen)
+  while(m_Window.isOpen())
     {
-      clock.restart();
-      float sec = time1.asSeconds();
-      p.input();
-      p.update(sec);
-      p.draw();
+      float sec = clock.restart().asSeconds();
+      input();
+      update(sec);
+      draw();
     }
 }
 
@@ -51,11 +48,15 @@ void Engine::input()
       {
           if(event.mouseButton.button == Mouse::Left)
           {
+            
+            Vector2i mouse_Pos = Mouse::getPosition(event.mouseButton.x,event.mouseButton.y);
+            
               for(int i = 0; i < 5; i++)
               {
-                m_numPoints = rand() % 26 + 25;
-                Particle particle; 
-                particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+                int numPoints = rand() % 26 + 25;
+                
+                Particle particle(m_Window, numPoints, mouse_Pos);
+                
                 m_particle.push_back(particle);
                 
               }
@@ -69,19 +70,20 @@ void Engine::input()
   } 
 }
 
-void Engine::update(float dt)
+void Engine::update(float dtAsSeconds)
 {
-  for(int i = 0; i < m_particles;)
+  auto num = m_particles.begin();
+  
+  while(num != m_particles.end())
     {
-      if(m_particles[i].getTTL() > 0.0)
+      if(num->getTTL() > 0.0f)
       {
-        m_particles[i].update(dt);
-        i++;
+        num->update(dtAsSeconds);
+        ++num;
       }
       else
       {
-        m_particles.erase(i);
-        return i++; //don't know if this would work
+        num = m_particles.erase(num);
         //DO NOT increment
       }
     }

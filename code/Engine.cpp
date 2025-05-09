@@ -50,7 +50,7 @@ void Engine::input()
           if(event.mouseButton.button == Mouse::Left)
           {
             
-            Vector2i mouse_Pos = Mouse::getPosition(event.mouseButton.x,event.mouseButton.y);
+            Vector2i mouse_Pos = Mouse::getPosition(m_Window);
             
               for(int i = 0; i < 5; i++)
               {

@@ -11,7 +11,7 @@ using namespace std;
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) {
     m_ttl = TTL;
     m_numPoints = numPoints;
-    float randomNumber = static_cast<float>(rand())/(RAND_MAX) /
+    float randomNumber = static_cast<float>(rand())/(RAND_MAX) * M_PI;
     m_radiansPerSec = randomNumber * PI;
 
     m_cartesianPlane.setCenter(0, 0);

@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
-#include "particle.cpp"
+#include "Particle.cpp"
 using namespace sf;
 using namespace std;
 

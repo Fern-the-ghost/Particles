@@ -50,13 +50,11 @@ void Engine::input()
           if(event.mouseButton.button == Mouse::Left)
           {
             
-            Vector2i mouse_Pos = Mouse::getPosition(m_Window);
-            
               for(int i = 0; i < 5; i++)
               {
                 int numPoints = rand() % 26 + 25;
                 
-                Particle particle(m_Window, numPoints, mouse_Pos);
+                Particle particle(m_Window, numPoints, (Event.mouseButton.x,Event.mouseButton.y);
                 
                 m_particles.push_back(particle);
                 

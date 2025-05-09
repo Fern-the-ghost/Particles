@@ -8,7 +8,7 @@ using namespace sf;
 using namespace std;
 //Done by Anna
 
-Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) {
+Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) {
     m_ttl = TTL;
     m_numPoints = numPoints;
     float randomNumber = static_cast<float>(rand())/(RAND_MAX) /
@@ -66,7 +66,7 @@ When the loop is finished, draw the VertexArray:
     target.draw(lines)
 */
 
-void draw(RenderTarget& target, RenderStates states) const {   
+void Particle::draw(RenderTarget& target, RenderStates states) const {   
     VertexArray lines(TriangleFan, numPoints + 1); 
     Vector2f center = target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane); 
 
@@ -99,7 +99,7 @@ Next we will calculate how far to shift / translate our particle, using distance
     Call translate using dx,dy as arguments
 */
 
-void update(float dt) { 
+void Particle::update(float dt) { 
     m_ttl -= dt; 
     rotate(dt * m_radiansPerSec);
     scale(SCALE);   
@@ -121,7 +121,7 @@ Update the particle's center coordinate:
     m_centerCoordinate.y += yShift;
  */
 
-translate(double xShift, double yShift) {
+Particle::translate(double xShift, double yShift) {
     TranslationMatrix T(xShift, yShift);
     T += m_A;
     m_centerCoordinate.x += xShift;
@@ -143,7 +143,7 @@ Shift our particle back to its original center:
     translate(temp.x, temp.y);
 */
 
-void rotate(double theta) {
+void Particle::rotate(double theta) {
     Vector2f temp = m_centerCoordinate;
     translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
     RotationMatrix R(theta);
@@ -166,7 +166,7 @@ Shift our particle back to its original center:
 
 */
 
-void scale(double c) {
+void Particle::scale(double c) {
     m_centerCoordinate = Vector2f temp;     
     translate(-m_centerCoordinate.x, -m_centerCoordinate.y); 
     ScalingMatrix S(c);   

@@ -94,7 +94,7 @@ void Engine::draw()
   for(const auto& Particle : m_particles)
     {
       //Will go through each particle in the vector and put it in m_window.draw where it will call the Particle draw function
-      m_Window.draw(Particles);
+      m_Window.draw(Particle);
     }
   m_Window.display();
 }

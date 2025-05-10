@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
-#include "Particle.cpp"
+#include "particle.cpp"
 using namespace sf;
 using namespace std;
 
@@ -12,25 +12,27 @@ vector<Particle> m_particles;
 
 Engine::Engine()
 {
-  m_Window.create(VideoMode(VideoMode::getDesktopMode()), "Particles Program");
+  create(m_Window);
+  VideoMode::getDesktopMode(1980,1080);
 }
 
 void Engine::run()
 {
   Clock clock;
+  Time time1 = clock.getElapsedTime();
   
   cout << "Starting Particle unit tests..." << endl;
   Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
   p.unitTests();
   cout << "Unit tests complete.  Starting engine..." << endl;
 
-  while(m_Window.isOpen())
+  while(m_Window.isOpen)
     {
-      Time time1 = clock.restart();
+      clock.restart();
       float sec = time1.asSeconds();
-      input();
-      update(sec);
-      draw();
+      p.input();
+      p.update(sec);
+      p.draw();
     }
 }
 
@@ -38,32 +40,30 @@ void Engine::input()
 {
   Event event;
   
-  while(m_Window.pollEvent(event))
+  while(m_window.pollEvent(event))
   {
       if(event.type == Event::Closed)
       {
-          m_Window.close();
+          m_window.close();
       }
   
       if(event.type == Event::MouseButtonPressed)
       {
           if(event.mouseButton.button == Mouse::Left)
           {
-            
               for(int i = 0; i < 5; i++)
               {
-                int numPoints = rand() % 26 + 25;
-                
-                Particle particle(m_Window, numPoints, (Event.mouseButton.x,Event.mouseButton.y);
-                
-                m_particles.push_back(particle);
+                m_numPoints = rand() % 26 + 25;
+                Particle particle; 
+                particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+                m_particle.push_back(particle);
                 
               }
           }
       }
       if (Keyboard::isKeyPressed(Keyboard::Escape))
       {
-          m_Window.close();
+          m_window.close();
       }
   
   } 
@@ -71,31 +71,30 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
-  float num = 0.0;
-  
-  while(num != m_particles.end())
+  for(int i = 0; i < m_particles)
     {
-      if(num->getTTL() > 0.0f)
+      if(m_particles[i].getTTL() > 0.0)
       {
-        num->update(dtAsSeconds);
-        ++num;
+        m_particles[i].update(dt);
+        i++;
       }
       else
       {
-        num = m_particles.erase(num);
+        m_particles.erase(i);
+        return i++; //don't know if this would work
         //DO NOT increment
       }
     }
 }
 
-void Engine::draw()
+void Endgine::draw()
 {
-  m_Window.clear();
+  m_window.clear();
   //using this for loop would keep the vector the same and not change any of the info in the vector
   for(const auto& Particle : m_particles)
     {
       //Will go through each particle in the vector and put it in m_window.draw where it will call the Particle draw function
-      m_Window.draw(Particle);
+      m_Window.draw(Particles);
     }
-  m_Window.display();
+  m_window.display();
 }

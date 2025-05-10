@@ -12,7 +12,7 @@ vector<Particle> m_particles;
 
 Engine::Engine()
 {
-  create(m_Window);
+  m_Window.create();
   VideoMode::getDesktopMode(1980,1080);
 }
 

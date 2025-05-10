@@ -71,17 +71,19 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
-  for(int i = 0; i < m_particles)
+  int num = 0;
+  
+  while(num < m_particles.end())
     {
-      if(m_particles[i].getTTL() > 0.0)
+      if(m_particles[num].getTTL() > 0.0)
       {
-        m_particles[i].update(dt);
-        i++;
+        m_particles[num].update(dtAsSeconds);
+        ++i;
       }
       else
       {
-        m_particles.erase(i);
-        return i++; //don't know if this would work
+        num = m_particles.erase();
+        //don't know if this would work
         //DO NOT increment
       }
     }

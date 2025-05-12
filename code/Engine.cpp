@@ -38,11 +38,11 @@ void Engine::input()
 {
   Event event;
   
-  while(m_window.pollEvent(event))
+  while(m_Window.pollEvent(event))
   {
       if(event.type == Event::Closed)
       {
-          m_window.close();
+          m_Window.close();
       }
   
       if(event.type == Event::MouseButtonPressed)
@@ -61,7 +61,7 @@ void Engine::input()
       }
       if (Keyboard::isKeyPressed(Keyboard::Escape))
       {
-          m_window.close();
+          m_Window.close();
       }
   
   } 

@@ -12,7 +12,7 @@ vector<Particle> m_particles;
 
 Engine::Engine()
 {
-  m_Window.create(VideoMode::getDesktopMode(1980,1080), "Particle Program");
+  m_Window.create(VideoMode::getDesktopMode(), "Particle Program");
 }
 
 void Engine::run()
@@ -24,7 +24,7 @@ void Engine::run()
   p.unitTests();
   cout << "Unit tests complete.  Starting engine..." << endl;
 
-  while(m_Window.isOpen)
+  while(m_Window.isOpen())
     {
       Time time1 = clock.restart();
       float sec = time1.asSeconds();
@@ -37,7 +37,6 @@ void Engine::run()
 void Engine::input()
 {
   Event event;
-  
   while(m_Window.pollEvent(event))
   {
       if(event.type == Event::Closed)
@@ -51,10 +50,10 @@ void Engine::input()
           {
               for(int i = 0; i < 5; i++)
               {
-                m_numPoints = rand() % 26 + 25;
+                int m_numPoints = rand() % 26 + 25;
                 Particle particle; 
                 particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
-                m_particle.push_back(particle);
+                m_particles.push_back(particle);
                 
               }
           }
@@ -72,7 +71,7 @@ void Engine::update(float dtAsSeconds)
   int num = 0;
   int i = 0;
   
-  while(num < m_particles.end())
+  while(num != m_particles.end())
     {
       if(m_particles[num].getTTL() > 0.0)
       {
@@ -81,14 +80,14 @@ void Engine::update(float dtAsSeconds)
       }
       else
       {
-        num = m_particles.erase();
+        num = m_particles.erase(num);
         //don't know if this would work
         //DO NOT increment
       }
     }
 }
 
-void Endgine::draw()
+void Engine::draw()
 {
   m_Window.clear();
   //using this for loop would keep the vector the same and not change any of the info in the vector

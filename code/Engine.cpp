@@ -51,8 +51,9 @@ void Engine::input()
               for(int i = 0; i < 5; i++)
               {
                 int m_numPoints = rand() % 26 + 25;
-                Particle particle; 
-                particle.position = sf::Vector2f(event.mouseButton.x,event.mouseButton.y);
+                
+                Particle particle(m_Window, m_numPoints, (event.mouseButton.button.x,event.mouseButton.button.y)); 
+                
                 m_particles.push_back(particle);
                 
               }
@@ -79,7 +80,7 @@ void Engine::update(float dtAsSeconds)
       }
       else
       {
-        num = m_particles.erase(num);
+        num = m_particles.erase(m_particles.begin() + num);
         //don't know if this would work
         //DO NOT increment
       }

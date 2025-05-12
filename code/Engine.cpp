@@ -1,9 +1,9 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
-#include "Particle.h"
+#include "Particle-2.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
-#include "particle.cpp"
+#include "Particle.cpp"
 using namespace sf;
 using namespace std;
 
@@ -12,13 +12,12 @@ vector<Particle> m_particles;
 
 Engine::Engine()
 {
-  m_Window.create(VideoMode::getDesktopMode(1980,1080));
+  m_Window.create(VideoMode::getDesktopMode(1980,1080), "Particle Program");
 }
 
 void Engine::run()
 {
   Clock clock;
-  Time time1 = clock.getElapsedTime();
   
   cout << "Starting Particle unit tests..." << endl;
   Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
@@ -27,11 +26,11 @@ void Engine::run()
 
   while(m_Window.isOpen)
     {
-      clock.restart();
+      Time time1 = clock.restart();
       float sec = time1.asSeconds();
-      p.input();
-      p.update(sec);
-      p.draw();
+      input();
+      update(sec);
+      draw();
     }
 }
 

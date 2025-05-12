@@ -76,7 +76,7 @@ void Engine::update(float dtAsSeconds)
       if(m_particles[num].getTTL() > 0.0)
       {
         m_particles[num].update(dtAsSeconds);
-        ++i;
+        ++num;
       }
       else
       {

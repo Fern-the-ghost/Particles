@@ -70,6 +70,7 @@ void Engine::input()
 void Engine::update(float dtAsSeconds)
 {
   int num = 0;
+  int i = 0;
   
   while(num < m_particles.end())
     {

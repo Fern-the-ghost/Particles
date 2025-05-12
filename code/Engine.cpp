@@ -79,8 +79,7 @@ void Engine::update(float dtAsSeconds)
       }
       else
       {
-        m_particles[num] = m_particles.back();
-        m_particles.pop_back();
+        num = m_particles.erase(num);
         //don't know if this would work
         //DO NOT increment
       }

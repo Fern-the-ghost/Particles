@@ -89,12 +89,12 @@ void Engine::update(float dtAsSeconds)
 
 void Endgine::draw()
 {
-  m_window.clear();
+  m_Window.clear();
   //using this for loop would keep the vector the same and not change any of the info in the vector
   for(const auto& Particle : m_particles)
     {
       //Will go through each particle in the vector and put it in m_window.draw where it will call the Particle draw function
-      m_Window.draw(Particles);
+      m_Window.draw(Particle);
     }
-  m_window.display();
+  m_Window.display();
 }

@@ -3,6 +3,7 @@
 #include "Particle.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
+#include <SFML/Audio/Sound.hpp>
 using namespace sf;
 using namespace std;
 
@@ -80,7 +81,7 @@ void Engine::input()
                 buffer.loadFromFile("./yippee-original-sound-effect-made-with-Voicemod.wav");
                 Sound yippee;
                 yippee.setBuffer(buffer);
-                yippee.play()
+                yippee.play();
                 
               }
           }

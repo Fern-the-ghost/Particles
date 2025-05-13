@@ -3,17 +3,33 @@
 #include "Particle.h"
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
-#include "Particle.cpp"
 using namespace sf;
 using namespace std;
 
 RenderWindow m_Window;
 vector<Particle> m_particles;
 
+//This part done by Anna
 Engine::Engine()
 {
-  m_Window.create(VideoMode::getDesktopMode(), "Particle Program");
+
+    unsigned int screenWidth = VideoMode::getDesktopMode().width / 2;
+    unsigned int screenHeight = VideoMode::getDesktopMode().height / 2;
+
+    VertexArray vertices(Points);
+
+    m_Window.create(VideoMode(screenWidth, screenHeight), "P A R T I C L E S"); //fixed
+
+
+    Font newFont;
+    newFont.loadFromFile("./ZillaSlab-Bold.ttf"); //put a new font
+    //mine is https://fonts.google.com/specimen/Roboto
+
+    Text newText("", newFont, 10);
+    newText.setFillColor(Color::White);
+    newText.setStyle(Text::Bold);
 }
+//End of Anna's contribution to this part
 
 void Engine::run()
 {
@@ -26,8 +42,9 @@ void Engine::run()
 
   while(m_Window.isOpen())
     {
-      //Time time1 = clock.restart();
-      float sec = clock.restart().asSeconds();
+      Time time1 = clock.restart();
+      float sec = time1.asSeconds();
+        
       input();
       update(sec);
       draw();
@@ -37,6 +54,7 @@ void Engine::run()
 void Engine::input()
 {
   Event event;
+  
   while(m_Window.pollEvent(event))
   {
       if(event.type == Event::Closed)
@@ -48,13 +66,14 @@ void Engine::input()
       {
           if(event.mouseButton.button == Mouse::Left)
           {
-            Vector2i mouseClickPosition = Mouse::getPosition(m_Window);
+            
+            Vector2i mouse_Pos = Mouse::getPosition(m_Window);
             
               for(int i = 0; i < 5; i++)
               {
-                int m_numPoints = rand() % 26 + 25;
+                int numPoints = rand() % 26 + 25;
                 
-                Particle particle(m_Window, m_numPoints, mouseClickPosition); 
+                Particle particle(m_Window, numPoints, mouse_Pos);
                 
                 m_particles.push_back(particle);
                 
@@ -70,22 +89,18 @@ void Engine::input()
 }
 
 void Engine::update(float dtAsSeconds)
-{
-  int num = 0;
-  
-  while(num < m_particles.size())
+{//Fix: m_particles is vector & not int, so cant use 'int i = 0'
+    for (size_t i = 0; i < m_particles.size();) //Fix: needs to have semi-colon, even if its not incremented
     {
-      if(m_particles[num].getTTL() > 0.0)
-      {
-        m_particles[num].update(dtAsSeconds);
-        num++;
-      }
-      else
-      {
-        num = m_particles.erase(num);
-        //don't know if this would work
-        //DO NOT increment
-      }
+        if (m_particles[i].getTTL() > 0.0f)
+        {
+            m_particles[i].update(dtAsSeconds);
+            i++;
+        }
+        else
+        {
+            m_particles.erase(m_particles.begin() + i);
+        }
     }
 }
 

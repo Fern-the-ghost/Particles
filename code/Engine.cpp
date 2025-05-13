@@ -76,6 +76,11 @@ void Engine::input()
                 Particle particle(m_Window, numPoints, mouse_Pos);
                 
                 m_particles.push_back(particle);
+                SoundBuffer buffer;
+                buffer.loadFromFile("./yippee-original-sound-effect-made-with-Voicemod.wav");
+                Sound yippee;
+                yippee.setBuffer(buffer);
+                yippee.play()
                 
               }
           }

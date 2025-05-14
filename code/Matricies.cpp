@@ -123,5 +123,6 @@ namespace Matrices
         for (int i = 0; i < nCols; i++){
             a[0][i] = xShift;
             a[1][i] = yShift;
+        }
     }
 }
